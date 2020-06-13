@@ -1,0 +1,51 @@
+version : '3.7'
+
+services:
+  client:
+    container_name: client
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile-dev
+    volumes:
+      - './services/client:/app'
+      - './services/client/node_modules:/app/node_modules'
+    ports:
+      - '3007:3000'
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+      - REACT_APP_RECAPTCHA_SITE_KEY='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+      - REQUIRE_RECAPTCHA=false
+    depends_on:
+      - manager
+    links:
+      - manager
+    stdin_open: true
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile-dev
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - manager
+      - client
+
+  manager:
+    container_name: manager
+    build:
+      context: ./services/manager
+      dockerfile: Dockerfile-dev
+    volumes:
+      - ./services/manager:/app
+    expose:
+      - '5000'
+    environment:
+      - FLASK_DEBUG=1
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - SECRET_KEY='my_precious'
+      - RECAPTCHA_SECRET_KEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
