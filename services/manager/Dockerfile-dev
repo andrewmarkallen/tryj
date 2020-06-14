@@ -1,4 +1,6 @@
-FROM python:3.8.3
+FROM docker:19.03.11
+RUN apk add py3-setuptools
+RUN apk add py-pip
 
 # set working directory
 RUN mkdir -p /app

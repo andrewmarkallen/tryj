@@ -1,0 +1,20 @@
+FROM  bitnami/minideb:stretch
+RUN apt-get update
+RUN apt-get install -y sudo
+
+
+
+# Install J
+RUN apt-get install -y curl
+RUN apt-get install -y gtk-update-icon-cache
+RUN mkdir -p /usr/share/applications/
+RUN mkdir -p /usr/share/icons/hicolor/scalable/apps/
+RUN curl -O http://www.jsoftware.com/download/j901/install/j901_amd64.deb
+RUN sudo dpkg -i j901_amd64.deb
+
+# Setup entrypoint script
+RUN mkdir -p /sandbox
+WORKDIR /sandbox
+COPY entrypoint.sh /sandbox/entrypoint.sh
+
+CMD ["./entrypoint.sh"]

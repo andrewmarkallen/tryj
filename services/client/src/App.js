@@ -1,24 +1,27 @@
 import React from 'react';
 import logo from './logo.svg';
+import AceEditor from 'react-ace'
 import './App.css';
+
+function onChange(newValue) {
+  console.log("change", newValue);
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AceEditor
+          mode="java"
+          theme="github"
+          onChange={onChange}
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+          setOptions={{
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: true
+          }}
+        />
     </div>
   );
 }
