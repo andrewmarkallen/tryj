@@ -2,4 +2,4 @@
 
 echo "Starting manager"
 
-tail -f /dev/null
+python3 manage.py run -h 0.0.0.0

@@ -1,0 +1,4 @@
+coverage==5.1
+Flask==1.1.2
+flask-debugtoolbar==0.11.0
+flask-cors==3.0.8
