@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import AceEditor from 'react-ace'
 import './App.css';
 
