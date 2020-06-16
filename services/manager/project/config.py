@@ -9,3 +9,8 @@ class BaseConfig:
 class DevelopmentConfig(BaseConfig):
     """Development Configuration"""
     DEBUG_TB_ENABLED = True
+
+
+class TestingConfig(BaseConfig):
+    """Testing Configuration"""
+    DEBUG_TB_ENABLED = True
