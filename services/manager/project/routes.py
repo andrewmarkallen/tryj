@@ -25,9 +25,11 @@ def new_session():
         return jsonify(response), 400
 
 
-@routes_blueprint.route('/j/repl', methods=['POST'])
+@routes_blueprint.route('/j/repl', methods=['GET', 'POST'])
 def repl():
     try:
+        print(f'{request=}')
+        print(request.get_json())
         uuid_str = request.get_json()['uuid']
         command = request.get_json()['command']
         uuid = UUID(uuid_str)

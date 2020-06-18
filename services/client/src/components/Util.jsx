@@ -5,7 +5,6 @@ export const service_url = `${process.env.REACT_APP_USERS_SERVICE_URL}`
 export const auth_json = () => {
   const a_j = {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${window.localStorage.authToken}`
   }
   return a_j
 }
