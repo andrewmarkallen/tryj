@@ -3,15 +3,22 @@ import os
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_cors import CORS
+from project.controller import Controller
 
 # instantiate the extensions
 toolbar = DebugToolbarExtension()
 
 
+class MyFlask(Flask):
+    def __init__(self, __name__):
+        super().__init__(__name__)
+        self.controller = Controller()
+
+
 def create_app(script_info=None):
 
     # instantiate the app
-    app = Flask(__name__)
+    app = MyFlask(__name__)
 
     # enable CORS
     CORS(app)

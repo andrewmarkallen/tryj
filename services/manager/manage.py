@@ -1,5 +1,6 @@
 import coverage
 import unittest
+import click
 
 from flask.cli import FlaskGroup
 from project import create_app
@@ -34,10 +35,18 @@ def cov():
     return 1
 
 
-@cli.command()
-def test():
+@cli.command('test')
+@click.option('--all', 'only', flag_value='test', default=True)
+@click.option('--only', 'only', flag_value='only_')
+@click.option('--name', default=None)
+def test(only, name):
     """Runs the test without code coverage"""
-    tests = unittest.TestLoader().discover('project/tests', pattern='test*.py')
+    loader = unittest.TestLoader()
+    loader.testMethodPrefix = only
+    if name is None:
+        tests = loader.discover('project/tests', 'test*.py')
+    else:
+        tests = loader.loadTestsFromName(name)
     result = unittest.TextTestRunner(verbosity=2).run(tests)
     if result.wasSuccessful():
         return 0
