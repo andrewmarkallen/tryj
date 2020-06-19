@@ -37,7 +37,6 @@ def repl():
             return response_failure('invalid uuid', 403)
         else:
             result = current_app.controller.run_command(command, uuid)
-            result = result[34:][:-3]
             return response_success('success', 201, {'result': result})
     except ValueError:
         return response_failure('malformed uuid', 400)

@@ -1,2 +1,3 @@
 __pycache__
 dev.env
+services/manager/project/__pycache__

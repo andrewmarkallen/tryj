@@ -1,4 +1,5 @@
 import docker
+import socket
 
 
 class Session:
@@ -25,12 +26,18 @@ class Session:
                 stdin=True,
                 socket=True
             )
+            self.socket._sock.settimeout(5)
         except Exception as e:
             print(e)
 
     def write(self, data):
-        print(data)
-        self.socket._sock.sendall(bytes(data, 'utf-8'))
-        print('sent')
-        response = self.socket._sock.recv(16384)
-        return response[8:].decode('utf-8')
+        try:
+            print(data)
+            self.socket._sock.sendall(bytes(data, 'utf-8'))
+            print('sent')
+            response = self.socket._sock.recv(16384)
+            print(response)
+            return response[8:].decode('utf-8')
+        except socket.timeout:
+            print("timeout")
+            return('\n')
