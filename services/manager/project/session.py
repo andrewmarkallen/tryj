@@ -32,6 +32,5 @@ class Session:
         print(data)
         self.socket._sock.sendall(bytes(data, 'utf-8'))
         print('sent')
-        response = str(self.socket._sock.recv(16384))
-        print(response)
-        return response
+        response = self.socket._sock.recv(16384)
+        return response[8:].decode('utf-8')
