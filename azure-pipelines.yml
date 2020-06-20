@@ -9,22 +9,25 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: Stage one
+    displayName: Build stage
+    jobs:
+      steps:
+      - script: echo Hello, world!
+        displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-- stage: Build
-  displayName: Build stage
-  jobs:
-  - deployment: VMDeploy
-    displayName: web
-    environment:
-      name:  tryj-environment
-      resourceType: VirtualMachine
-      tags: web1
-    strategy:
+      - script: |
+          echo Add other tasks to build, test, and deploy your project.
+          echo See https://aka.ms/yaml
+        displayName: 'Run a multi-line script'
+  - stage: Build
+    displayName: Build stage
+    jobs:
+    - deployment: VMDeploy
+      displayName: web
+      environment:
+        name:  tryj-environment
+        resourceType: VirtualMachine
+        tags: web1
+      strategy:
