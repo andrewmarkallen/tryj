@@ -18,11 +18,13 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-jobs:
-- deployment: VMDeploy
-  displayName: web
-  environment:
-    name:  tryj-environment
-    resourceType: VirtualMachine
-    tags: web1
-  strategy:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - deployment: VMDeploy
+    displayName: web
+    environment:
+      name:  tryj-environment
+      resourceType: VirtualMachine
+      tags: web1
+    strategy:
