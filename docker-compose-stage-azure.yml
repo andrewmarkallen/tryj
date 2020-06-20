@@ -6,10 +6,8 @@ services:
     build:
       context: ./services/client
       dockerfile: Dockerfile-dev
-    image: tryj:client
+    image: markacontainerregistry.azurecr.io/tryj:client
     volumes:
-      - './services/client:/app'
-      - './services/client/node_modules:/app/node_modules'
     ports:
       - '3007:3000'
     environment:
@@ -29,7 +27,7 @@ services:
     build:
       context: ./services/nginx
       dockerfile: Dockerfile-dev
-    image: tryj:nginx
+    image: markacontainerregistry.azurecr.io/tryj:nginx
     restart: always
     ports:
       - 80:80
@@ -42,7 +40,7 @@ services:
     build:
       context: ./services/manager
       dockerfile: Dockerfile-dev
-    image: tryj:manager
+    image: markacontainerregistry.azurecr.io/tryj:manager
     volumes:
       - ./services/manager:/app
       - /var/run/docker.sock:/var/run/docker.sock
