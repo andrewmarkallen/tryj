@@ -7,7 +7,6 @@ services:
       context: ./services/client
       dockerfile: Dockerfile-dev
     image: markacontainerregistry.azurecr.io/tryj:client
-    volumes:
     ports:
       - '3007:3000'
     environment:
