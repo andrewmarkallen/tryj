@@ -32,4 +32,4 @@ stages:
         runOnce:
           deploy:
             steps:
-             script: echo my first Deployment
+            - script: echo my first Deployment
