@@ -23,6 +23,13 @@ stages:
       - script: echo Testing!
   - stage: Deploy
     jobs:
-    - job: Deploy
-      steps:
-      - script: echo Deploying the code!
+    - deployment: Deploy
+      displayName: deploy Web App
+      pool:
+        vmImage: 'Ubuntu-16.04'
+      environment: 'tryj-environment'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+             script: echo my first Deployment
