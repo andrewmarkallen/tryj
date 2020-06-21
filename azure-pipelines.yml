@@ -18,8 +18,8 @@ stages:
       - script: echo Building!
   - stage: Test
     jobs:
-     job: Test
-     steps:
+    - job: Test
+      steps:
       - script: echo Testing!
   - stage: Deploy
     jobs:
