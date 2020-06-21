@@ -32,6 +32,7 @@ stages:
         runOnce:
           deploy:
             steps:
+            - checkout
             - script: echo my first Deployment
             - script: lsb_release -a
             - script: uname -a
