@@ -3,6 +3,7 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+name: $(Date:yyyyMMdd)$(Rev:.r)
 trigger:
 - master
 
@@ -10,24 +11,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-  - stage: Stage one
-    displayName: Build stage
-    jobs:
-      steps:
-      - script: echo Hello, world!
-        displayName: 'Run a one-line script'
-
-      - script: |
-          echo Add other tasks to build, test, and deploy your project.
-          echo See https://aka.ms/yaml
-        displayName: 'Run a multi-line script'
   - stage: Build
-    displayName: Build stage
     jobs:
-    - deployment: VMDeploy
-      displayName: web
-      environment:
-        name:  tryj-environment
-        resourceType: VirtualMachine
-        tags: web1
-      strategy:
+    - job: BuildJob
+      steps:
+      - script: echo Building!
+  - stage: Test
+    jobs:
+     job: Test
+     steps:
+      - script: echo Testing!
+  - stage: Deploy
+    jobs:
+    - job: Deploy
+      steps:
+      - script: echo Deploying the code!
