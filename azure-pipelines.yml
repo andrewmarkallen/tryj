@@ -36,3 +36,4 @@ stages:
             - script: lsb_release -a
             - script: uname -a
             - script: ls -la
+            - script: docker-compose -f docker-compose-stage-azure.yml up -d --build
