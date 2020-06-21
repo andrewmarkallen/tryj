@@ -34,6 +34,7 @@ stages:
             steps:
             - checkout: self
             - script: echo my first Deployment
+            - script: pwd
             - script: lsb_release -a
             - script: uname -a
             - script: ls -la
