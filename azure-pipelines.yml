@@ -33,3 +33,6 @@ stages:
           deploy:
             steps:
             - script: echo my first Deployment
+            - script: lsb_release -a
+            - script: uname -a
+            - script: ls -la
