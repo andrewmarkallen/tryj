@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import JConsole from './components/JConsole'
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
