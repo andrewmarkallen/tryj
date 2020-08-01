@@ -1,0 +1,28 @@
+FROM docker:19.03.11
+RUN apk add py3-setuptools
+RUN apk add py-pip
+
+# set working directory
+RUN mkdir -p /app
+WORKDIR /app
+
+# add requirements
+COPY ./requirements.txt /app/requirements.txt
+
+# install requirements
+RUN pip install -r requirements.txt
+
+# add entrypoint.sh
+COPY ./entrypoint.sh /app/entrypoint.sh
+
+# add app
+COPY . /app
+
+# create directory for sandboxes
+RUN mkdir -p /tmp/sandboxes
+
+# set permissions
+RUN ["chmod", "+x", "/app/entrypoint.sh"]
+
+# run server
+CMD ["/app/entrypoint.sh"]
